@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experience — Aditya Chitransh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page-fade-in">
+
+  <nav class="nav">
+    <div class="nav-container">
+      <a href="index.html" class="logo">AC.</a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="about.html" class="nav-link">About</a></li>
+        <li><a href="experience.html" class="nav-link active">Experience</a></li>
+        <li><a href="projects.html" class="nav-link">Projects</a></li>
+        <li><a href="skills.html" class="nav-link">Skills</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="#contact" class="btn btn-sm">Contact</a>
+        <button id="themeToggle" class="theme-toggle" aria-label="Toggle Theme">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="bulb-icon"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="page-container content-wrapper standalone-page">
+    <section class="section pt-xl">
+      <div class="card experience-card">
+        <div class="card-header">
+          <h2 class="card-title">Experience & Education</h2>
+        </div>
+        <div class="card-body">
+          <div class="tabs-container">
+            <div class="tabs" role="tablist">
+              <button class="tab-btn active" role="tab" data-target="tab-etpa">ETPA</button>
+              <button class="tab-btn" role="tab" data-target="tab-accenture">Accenture</button>
+              <button class="tab-btn" role="tab" data-target="tab-edu">Education</button>
+            </div>
+            
+            <div class="tab-content-area">
+              <div class="tab-pane active" id="tab-etpa" role="tabpanel">
+                <div class="role-header">
+                  <h3>Market Surveillance Analyst Intern</h3>
+                  <span class="pill pill-date">APR'25 — OCT'25</span>
+                </div>
+                <ul class="role-points">
+                  <li>Applied data analytics to detect market manipulation in European power trading</li>
+                  <li>Built anomaly detection models from scratch</li>
+                  <li>Identified 5-6% of suspected manipulative trades</li>
+                </ul>
+                <div class="pill-group">
+                  <span class="pill pill-tech">Python</span>
+                  <span class="pill pill-tech">Excel</span>
+                  <span class="pill pill-tech">Regulatory Compliance (REMIT, CACM)</span>
+                </div>
+              </div>
+
+              <div class="tab-pane" id="tab-accenture" role="tabpanel">
+                <div class="role-header">
+                  <h3>Associate Analyst</h3>
+                  <span class="pill pill-date">MAY'21 — FEB'22</span>
+                </div>
+                <ul class="role-points">
+                  <li>Enhanced business performance through data analytics</li>
+                  <li>Improved forecasting accuracy by 8%</li>
+                  <li>Built and maintained Power BI and Tableau dashboards</li>
+                </ul>
+                <div class="pill-group">
+                  <span class="pill pill-tech">Power BI</span>
+                  <span class="pill pill-tech">Tableau</span>
+                  <span class="pill pill-tech">SQL</span>
+                  <span class="pill pill-tech">Excel</span>
+                </div>
+              </div>
+
+              <div class="tab-pane" id="tab-edu" role="tabpanel">
+                <div class="role-header">
+                  <h3>MSc Business Analytics</h3>
+                  <span class="pill pill-date">Tilburg University</span>
+                </div>
+                <ul class="role-points">
+                  <li>Grade: 8</li>
+                  <li>Focus on scalable analytics, machine learning, and advanced business intelligence strategies.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Global Contact Footer -->
+    <section id="contact" class="section mb-xl">
+      <div class="card contact-card">
+        <div class="card-body">
+          <div class="contact-header">
+            <h2>Get In Touch</h2>
+            <p>Available for opportunities in data analytics and business intelligence.</p>
+          </div>
+          <div class="contact-methods">
+            <a href="mailto:aditya.chitransh04@gmail.com" class="btn btn-outline">aditya.chitransh04@gmail.com</a>
+            <a href="tel:+919570821766" class="btn btn-outline">+91-9570821766</a>
+            <a href="https://linkedin.com/in/achitransh" target="_blank" rel="noopener" class="btn btn-outline">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="page-container flex-between">
+      <span>© 2026 Aditya Chitransh.</span>
+      <span>Minimalist Data Profile.</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,130 +1,57 @@
-/* Minimalist JS for Aditya Chitransh Portfolio */
-
 document.addEventListener('DOMContentLoaded', () => {
 
-  // 1. Mobile Navigation Toggle
-  const mobileToggle = document.querySelector('.mobile-toggle');
-  const mobileMenu = document.querySelector('.mobile-menu');
-  const mobileLinks = document.querySelectorAll('.mobile-menu a');
-  let isMenuOpen = false;
-
-  function toggleMenu() {
-    isMenuOpen = !isMenuOpen;
-    mobileMenu.classList.toggle('open', isMenuOpen);
-    
-    // Animate hamburger icon
-    const spans = mobileToggle.querySelectorAll('span');
-    if (isMenuOpen) {
-      spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
-      spans[1].style.transform = 'rotate(-45deg) translate(5px, -5px)';
-      document.body.style.overflow = 'hidden';
-    } else {
-      spans[0].style.transform = 'none';
-      spans[1].style.transform = 'none';
-      document.body.style.overflow = '';
-    }
+  // 1. Theme Toggle Logic
+  const themeToggle = document.getElementById('themeToggle');
+  
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
   }
 
-  mobileToggle.addEventListener('click', toggleMenu);
+  // Set default theme from localStorage or default to 'light'
+  const currentTheme = localStorage.getItem('theme') || 'light';
+  setTheme(currentTheme);
 
-  mobileLinks.forEach(link => {
-    link.addEventListener('click', () => {
-      if (isMenuOpen) toggleMenu();
-    });
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    setTheme(isDark ? 'light' : 'dark');
   });
 
-  // 2. Nav Scroll Effect (Adds border on scroll)
-  const nav = document.querySelector('.nav');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  }, { passive: true });
+  // 2. Tabbed Experience Logic (Runs only on experience.html)
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
 
-  // 3. Smooth Scrolling for Anchor Links
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  if(tabBtns.length > 0) {
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabPanes.forEach(p => p.classList.remove('active'));
+
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        document.getElementById(targetId).classList.add('active');
+      });
+    });
+  }
+
+  // 3. Page Fade-In Logic (Replaces the heavy scroll intersection observers since every page is loaded instantly)
+  setTimeout(() => {
+    document.body.classList.add('page-loaded');
+  }, 50);
+
+  // 4. Smooth Anchor Scroll for the Contact Section only
+  document.querySelectorAll('a[href="#contact"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
-      const targetId = this.getAttribute('href');
-      if (targetId === '#') return;
-      
-      const targetElement = document.querySelector(targetId);
+      const targetElement = document.querySelector('#contact');
       if (targetElement) {
         e.preventDefault();
-        targetElement.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        const offset = 80; 
+        window.scrollTo({
+          top: targetElement.getBoundingClientRect().top + window.scrollY - offset,
+          behavior: 'smooth'
         });
       }
     });
   });
-
-  // 4. Fade-in on Scroll (Intersection Observer)
-  const fadeElements = document.querySelectorAll('.fade-in');
-  
-  const fadeObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('appear');
-        observer.unobserve(entry.target); 
-      }
-    });
-  }, {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.15
-  });
-
-  fadeElements.forEach(el => fadeObserver.observe(el));
-
-  // 5. Contact Form Simulation
-  const contactForm = document.getElementById('contactForm');
-  const formSuccess = document.getElementById('formSuccess');
-  const submitBtn = document.getElementById('submitBtn');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      // Basic Validation 
-      let isValid = true;
-      const inputs = contactForm.querySelectorAll('input, textarea');
-      inputs.forEach(input => {
-        if (!input.value.trim()) {
-          isValid = false;
-          input.style.borderColor = 'red';
-        } else {
-          input.style.borderColor = 'var(--color-border)';
-        }
-      });
-
-      if (isValid) {
-        // Simulate Send
-        const originalText = submitBtn.innerHTML;
-        submitBtn.innerHTML = 'Sending...';
-        submitBtn.disabled = true;
-
-        setTimeout(() => {
-          submitBtn.innerHTML = originalText;
-          submitBtn.disabled = false;
-          formSuccess.classList.add('show');
-          contactForm.reset();
-
-          // Hide success message after 5 seconds
-          setTimeout(() => {
-            formSuccess.classList.remove('show');
-          }, 5000);
-        }, 1500);
-      }
-    });
-
-    // Remove red border on typing
-    contactForm.querySelectorAll('input, textarea').forEach(input => {
-      input.addEventListener('input', () => {
-        input.style.borderColor = 'var(--color-border)';
-      });
-    });
-  }
 
 });
